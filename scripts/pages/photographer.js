@@ -5,44 +5,94 @@ async function getPhotographersInfo(photographerId) {
     let allDataPhotographers = allDataJson.photographers;
     let allDataMedia = allDataJson.media;
 
-    let photographerInfo;
-    for(let i = 0 ; i < allDataPhotographers.length ; i++) {
-        if(allDataPhotographers[i].id == photographerId) {
-            photographerInfo = allDataPhotographers[i];
-        }
-    }
+    const photographerInfo = allDataPhotographers.filter(photographers => photographers.id == photographerId )[0];
 
-    let photographerMedias = [];
-    for(let j = 0 ; j < allDataMedia.length ; j++) {
-        if(allDataMedia[j].photographerId == photographerId) {
-            photographerMedias.push(allDataMedia[j]);
-        }
-    }
+    const photographerMedias = allDataMedia.filter(el =>  el.photographerId == photographerId)
 
-    console.log("======")
-    console.log(allDataPhotographers);
-    console.log("======")
-    console.log(photographerInfo);
-    console.log("======")
-    console.log(photographerMedias);
-    console.log("======")
-
-    return( photographerInfo )
+    return( { photographerInfo, photographerMedias} )
 }
 
-async function displayDataPhotographer(photographerInfo) {
+function getUserHeaderDOM(data) {
+    const { name, portrait, city, country, tagline } = data;
+
+    const picture = `assets/photographers/${portrait}`;
+    // creation of DOM elements
+    //const heart = document.createElement('i');
+    const infosDiv = document.createElement('div');
+    const h1 = document.createElement('h1');
+    const localisationParagraph = document.createElement('p');
+    const taglineParagraph = document.createElement('p');
+    const buttonDiv = document.createElement('div');
+    const button = document.createElement('button');
+    const portraitDiv = document.createElement('div');
+    const img = document.createElement('img');
+
+    // text modification of DOM's elements
+    h1.textContent = name;
+    localisationParagraph.textContent = city + ", " + country;
+    taglineParagraph.textContent = tagline;
+    button.textContent = "Contactez-moi";
+
+    // add attributes of the different elements
+    localisationParagraph.setAttribute('id', 'localisation');
+    taglineParagraph.setAttribute('id', 'tagline');
+    button.classList.add('contact_button');
+    button.setAttribute('aria-label', "Contact me");
+    img.setAttribute("src", picture);
+    img.setAttribute('aria-label', name);
+        
+    // add children to the parent (article)
+    infosDiv.appendChild(h1);
+    infosDiv.appendChild(localisationParagraph);
+    infosDiv.appendChild(taglineParagraph);
+    buttonDiv.appendChild(button);
+    portraitDiv.appendChild(img);
+
+    // add button event listener
+    button.addEventListener('click', displayModal);
+
+    let res = {infosDiv, buttonDiv, portraitDiv};
+    return res;
+}
+
+function getUserMedia(photographerData) {
+    const mediaSection = document.querySelector('.photograph-media');
+
+    const photographerInfo = photographerData.photographerInfo;
+    const photographerMedias = photographerData.photographerMedias;
+
+    photographerMedias.forEach((media) => {
+        const mediaModel = mediaFactory(media, photographerInfo.name);
+        mediaSection.appendChild(mediaModel);
+    })
+}
+
+function getUserLikesPrice(data) {
+    const { price } = data;
+
+    const numberofLikes = document.querySelector('#numberOfLikes');
+    const priceSpan = document.querySelector('.price');
+
+    numberofLikes.textContent = "297 081 ";
+    priceSpan.textContent = price + "€ / jour";
+}
+
+async function displayDataPhotographer(photographerData) {
+    console.log(photographerData.photographerMedias)
     const photographerHeader = document.querySelector('.photograph-header');
-    const photographerModel = photographerFactory(photographerInfo);
-    const userHeaderDOM = photographerModel.getUserHeaderDOM();
+    const userHeaderDOM = getUserHeaderDOM(photographerData.photographerInfo);
     photographerHeader.appendChild(userHeaderDOM.infosDiv);
     photographerHeader.appendChild(userHeaderDOM.buttonDiv);
     photographerHeader.appendChild(userHeaderDOM.portraitDiv);
-    photographerHeader.appendChild(userHeaderDOM.likesPriceDiv);
+
+    getUserMedia(photographerData)
+
+    getUserLikesPrice(photographerData.photographerInfo);
 }
 
 async function init() {
-    const url = window.location.search.split("=")[1];
-    const photographersInfo = await getPhotographersInfo(url);
+    const idInUrl = window.location.search.split("=")[1];
+    const photographersInfo = await getPhotographersInfo(idInUrl);
     displayDataPhotographer(photographersInfo)
 }
 

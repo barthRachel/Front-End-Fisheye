@@ -15,10 +15,11 @@
     </header>
 
     <main id="main">
-      <div class="photograph-header">
+      <section class="photograph-header">
         <!--<button class="contact_button" onclick="displayModal()">Contactez-moi</button>-->
-      </div>
-      <div class="filter-medias">
+      </section>
+
+      <section class="filter-medias">
         <label for="filter-select" aria-label="Order by">Trier par </label>
 
         <select name="filters" id="filter-select">
@@ -26,7 +27,16 @@
           <option value="date">Date</option>
           <option value="title">Titre</option>
         </select>
-      </div>
+      </section>
+
+      <section class="photograph-media">
+
+      </section>
+
+      <aside class="like_price">
+        <p class="likes"> <span id="numberOfLikes"></span> <i class="fa fa-heart"></i></p>
+        <p class="price"></p>
+      </aside>
     </main>
 
     <div id="contact_modal">
@@ -44,6 +54,7 @@
 				</form>
 			</div>
 		</div>
+    <script src="scripts/factories/media.js"></script>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
