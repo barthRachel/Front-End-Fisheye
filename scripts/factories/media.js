@@ -42,6 +42,7 @@ function getImageCard(data, name) {
 
     img.setAttribute("src", `assets/images/${firstname}/${data.image}`);
     img.setAttribute("alt", `${data.title} by ${name}`)
+    img.setAttribute('aria-label', `${data.title} by ${name}`)
 
     article.insertBefore(img, article.firstChild);
     return(article);
@@ -57,6 +58,8 @@ function getVideoCard(data, name) {
     const source = document.createElement('source');
 
     source.setAttribute("src", `assets/images/${firstname}/${data.video}`);
+    video.setAttribute('aria-label', `${data.title} by ${name}`);
+    video.controls = true;
 
     video.appendChild(source);
     article.insertBefore(video, article.firstChild);

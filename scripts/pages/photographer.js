@@ -49,7 +49,9 @@ function getUserHeaderDOM(data) {
     portraitDiv.appendChild(img);
 
     // add button event listener
-    button.addEventListener('click', displayModal);
+    button.addEventListener('click', () => {
+        displayModal(name)
+    });
 
     let res = {infosDiv, buttonDiv, portraitDiv};
     return res;

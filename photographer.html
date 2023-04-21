@@ -10,11 +10,11 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <header>
+    <header id="headerPage" aria-hidden="false">
       <a href="index.html" aria-label="Fisheye Home page"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" /></a>
     </header>
 
-    <main id="main">
+    <main id="main" aria-hidden="false">
       <section class="photograph-header">
         <!--<button class="contact_button" onclick="displayModal()">Contactez-moi</button>-->
       </section>
@@ -24,7 +24,6 @@
 
         <select name="filters" id="filter-select">
           <option value="popularity">Popularité</option>
-          <option value="date">Date</option>
           <option value="title">Titre</option>
         </select>
       </section>
@@ -39,24 +38,107 @@
       </aside>
     </main>
 
-    <div id="contact_modal">
+    <div id="contact_modal" role="dialog" aria-hidden="true" aria-describedby="Contact">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <h1 id="Contact">Contactez-moi <br/> <span id="photographerNameForModal"></span></h1>
+          <!--<img id="modalCloseButton" src="assets/icons/close.svg" onclick="closeModal()" />-->
+          <button aria-label="Close contact form" id="modalCloseButton" onclick="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></button>
         </header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="firstname">Prénom</label>
+						<input aria-label="First name" type="text" id="firstname" name="firstname" />
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <div>
+            <label for="lastname">Nom</label>
+						<input aria-label="Last name" type="text" id="lastname" name="lastname" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input aria-label="Email" type="email" id="email" name="email"/>
+          </div>
+          <div>
+            <label for="message">Votre message</label>
+            <textarea aria-label="Your message" id="message" name="message">
+            </textarea>
+          </div>
+
+          <!--<button aria-label="Send" class="contact_button" onclick="sendInfo()">Envoyer</button>-->
 				</form>
+        <div class="buttonBox">
+          <button aria-label="Send" class="contact_button" onclick="sendInfo()">Envoyer</button>
+        </div>
 			</div>
 		</div>
+
+    <div id="lightbox_carousel" role="dialog" aria-hidden="true" aria-describedby="Carousel">
+      <div class="carousel">
+        <h1 class="sr-only">Carousel</h1>
+
+        <ul class="carousel" aria-label="Image closeup view">
+          <li class="carousel-item item-0" aria-hidden="false">
+            <div role="button" class="controls controls-left">
+              <span class="img prev-image">
+                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
+              </span>
+              <p class="sr-only">Previous</p>
+            </div>
+            <div role="button" class="controls controls-right">
+              <span class="img next-image">
+                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
+              </span>
+              <p class="sr-only">Next</p>
+            </div>
+
+            <div class="carousel-media">
+              <img src="assets/images/Marcel/Architecture_Corner_Room.jpg">
+            </div>
+          </li>
+
+          <li class="carousel-item item-1" aria-hidden="true">
+            <div role="button" class="controls controls-left">
+              <span class="img prev-image">
+                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
+              </span>
+              <p class="sr-only">Previous</p>
+            </div>
+            <div role="button" class="controls controls-right">
+              <span class="img next-image">
+                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
+              </span>
+              <p class="sr-only">Next</p>
+            </div>
+            <div class="carousel-media">
+              <img src="assets/images/Marcel/Architecture_Corner_Room.jpg">
+            </div>
+          </li>
+          <li class="carousel-item item-2" aria-hidden="true">
+            <div role="button" class="controls controls-left">
+              <span class="img prev-image">
+                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
+              </span>
+              <p class="sr-only">Previous</p>
+            </div>
+            <div role="button" class="controls controls-right">
+              <span class="img next-image">
+                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
+              </span>
+              <p class="sr-only">Next</p>
+            </div>
+            <div class="carousel-media">
+              <img src="assets/images/Marcel/Architecture_Corner_Room.jpg">
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/pages/photographer.js"></script>
+    <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
   </body>
 </html>
