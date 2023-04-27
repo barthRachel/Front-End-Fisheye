@@ -1,14 +1,11 @@
-function mediaFactory(data, name) {
-    //const { id, title, likes, date, price } = data;
+function mediaFactory(data, name) { 
     let extension;
     data.image ? extension = (data.image).split('.')[1] : extension = (data.video).split('.')[1];
 
     if (extension === "jpg" || extension === "png") {
         return getImageCard(data, name);
-        //getMediaDOM(data);
     } else if (extension === "mp4" || extension === "webm") {
         return getVideoCard(data, name);
-        //getMediaDOM(data);
     } else {
         console.log("Unknon type");
     }
@@ -16,25 +13,20 @@ function mediaFactory(data, name) {
 }
 
 function getMediaDOM(data) {
-    //console.log("Youhou");
-
     const article = document.createElement('article');
     const aside = document.createElement('aside');
     const nameParagraph = document.createElement('p');
     const likeParagraph = document.createElement('p');
     nameParagraph.textContent = data.title;
-    likeParagraph.innerHTML = data.likes + ` <i class='fa fa-heart notLike' aria-label="likes"></i>`;
+    likeParagraph.innerHTML = `<span class='likesNumber'>${data.likes}</span> <i class='fa fa-heart likeButton notLike' aria-label="likes" ></i>`;
     aside.appendChild(nameParagraph);
     aside.appendChild(likeParagraph);
     article.appendChild(aside);
 
     return(article);
-
 }
 
 function getImageCard(data, name) {
-    //console.log("Image");
-
     let firstname = name.split(' ')[0].split('-').join(' ');
 
     const article = getMediaDOM(data);
@@ -53,8 +45,6 @@ function getImageCard(data, name) {
 }
 
 function getVideoCard(data, name) {
-    //console.log("Video");
-
     let firstname = name.split(' ')[0].split('-').join(' ');
 
     const article = getMediaDOM(data);
@@ -73,4 +63,31 @@ function getVideoCard(data, name) {
     article.insertBefore(button, article.firstChild);
 
     return(article);
+}
+
+function likeDislike() {
+    const likeButtons = document.querySelectorAll('.likeButton');
+    const spanLikes = document.querySelectorAll('.likesNumber');
+    let likeNumber, likeTotal;
+    
+    for(let i =0 ; i < likeButtons.length ; i++){
+        likeButtons[i].addEventListener('click', (e) => {
+            if(e.target.classList.contains('notLike')){
+                e.target.classList.remove('notLike');
+                e.target.classList.add('isLike');
+
+                likeNumber = parseInt(spanLikes[i].textContent) + 1;
+                likeTotal = parseInt(numberofLikes.textContent) + 1;
+            } else {
+                e.target.classList.remove('isLike');
+                e.target.classList.add('notLike');
+
+                likeNumber = parseInt(spanLikes[i].textContent) - 1;
+                likeTotal = parseInt(numberofLikes.textContent) - 1;
+            }
+
+            numberofLikes.innerText = likeTotal;
+            spanLikes[i].innerText = likeNumber;
+        })
+    }
 }

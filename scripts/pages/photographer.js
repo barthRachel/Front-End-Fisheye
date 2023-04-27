@@ -1,4 +1,6 @@
 //Mettre le code JavaScript lié à la page photographer.html
+let numberofLikes = document.querySelector('#numberOfLikes');
+
 async function getPhotographersInfo(photographerId) {
     let allData = await fetch('data/photographers.json');
     let allDataJson = await allData.json();
@@ -18,8 +20,6 @@ function getUserHeaderDOM(data) {
     document.title = `${name} - Fisheye`;
 
     const picture = `assets/photographers/${portrait}`;
-    // creation of DOM elements
-    //const heart = document.createElement('i');
     const infosDiv = document.createElement('div');
     const h1 = document.createElement('h1');
     const localisationParagraph = document.createElement('p');
@@ -61,36 +61,28 @@ function getUserHeaderDOM(data) {
 
 function getUserMedia(photographerData) {
     const mediaSection = document.querySelector('.photograph-media');
-    //const carousel = document.querySelector('ul.carousel');
 
     const photographerInfo = photographerData.photographerInfo;
     const photographerMedias = photographerData.photographerMedias;
+    
     let position = 0;
+    let numberofLikesInt = 0;
 
     photographerMedias.forEach((media) => {
         const mediaModel = mediaFactory(media, photographerInfo.name);
         mediaModel.setAttribute('data-position', position);
         mediaSection.appendChild(mediaModel);
+        numberofLikesInt = numberofLikesInt + media.likes;
+        numberofLikes.innerText = numberofLikesInt;
         position++;
-        //const slide = createSlide(media, photographerInfo.name);
-        //carousel.appendChild(slide);
-        //console.log(media)
     })
-
-    //document.querySelector('.carousel-item').classList.add('activeSlide');
-    //document.querySelector('.carousel-item').classList.remove('hiddenSlide');
-
-    //console.log(document.querySelector(".carousel-item"));
-    //console.log(document.querySelectorAll('.carousel-item')[document.querySelectorAll('.carousel-item').length-1])
 }
 
-function getUserLikesPrice(data) {
+function getUserPrice(data) {
     const { price } = data;
 
-    const numberofLikes = document.querySelector('#numberOfLikes');
     const priceSpan = document.querySelector('.price');
-
-    numberofLikes.textContent = "297 081 ";
+    
     priceSpan.textContent = price + "€ / jour";
 }
 
@@ -104,7 +96,7 @@ async function displayDataPhotographer(photographerData) {
 
     getUserMedia(photographerData)
 
-    getUserLikesPrice(photographerData.photographerInfo);
+    getUserPrice(photographerData.photographerInfo);
 
     getLightbox();
 }
@@ -112,7 +104,9 @@ async function displayDataPhotographer(photographerData) {
 async function init() {
     const idInUrl = window.location.search.split("=")[1];
     const photographersInfo = await getPhotographersInfo(idInUrl);
-    displayDataPhotographer(photographersInfo)
+    displayDataPhotographer(photographersInfo);
+
+    likeDislike();
 }
 
 init();

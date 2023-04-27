@@ -150,6 +150,4 @@ function getLightbox(){
             closeLightbox();
         }
     })
-
-    
 }
