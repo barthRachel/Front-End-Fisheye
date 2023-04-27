@@ -1,73 +1,151 @@
 // Global var
-const prevBtn = document.querySelector('.prev-image')
-const nextBtn = document.querySelector('.next-image')
-const carouselItems = document.querySelectorAll('.carousel-item')
-//const $carouselPauseBtn = $('.carousel-pause-btn')
- 
-let currentItemPosition = 0
-//let carouselInterval
- 
-// Funcs
-const goToNextSlide = () => {
-   if (currentItemPosition + 1 >=  carouselItems.length) {
-      
-       const lastItem = `.item-${currentItemPosition}`
- 
-       currentItemPosition = 0
-       const currentItem = `.item-${currentItemPosition}`
-      
-       setNodeAttributes(lastItem, currentItem)
-   } else {
-       currentItemPosition += 1
-       const lastItem = `.item-${currentItemPosition - 1}`
-       const currentItem = `.item-${currentItemPosition}`
-      
-       setNodeAttributes(lastItem, currentItem)
-   }
+const $prevBtn = $('.prev-image');
+const $nextBtn = $('.next-image');
+
+function openLightbox(){
+    const headerPage = document.querySelector('#headerPage');
+    const main = document.querySelector('#main');
+    const lightbox = document.getElementById("lightbox_carousel");
+    const lightboxCloseButton = document.querySelector('#lightboxCloseButton');
+
+    lightbox.style.display = 'flex';
+    headerPage.setAttribute('aria-hidden', 'true');
+    main.setAttribute('aria-hidden', 'true');
+    lightbox.setAttribute('aria-hidden', 'false');
+    lightboxCloseButton.focus();
+    document.querySelector('body').style.overflow ='hidden';
 }
- 
-const goToPreviousSlide = () => {
-   if (currentItemPosition - 1 >=  0) {
-       currentItemPosition -= 1
-       const currentItem = `.item-${currentItemPosition}`
-       const lastItem = `.item-${currentItemPosition + 1}`
- 
-       setNodeAttributes(lastItem, currentItem)
-   } else {
-       const lastItem = `.item-${currentItemPosition}`
-      
-       currentItemPosition = 2
-       const currentItem = `.item-${currentItemPosition}`
-      
-       setNodeAttributes(lastItem, currentItem)
-   }
+
+function closeLightbox(){
+    const headerPage = document.querySelector('#headerPage');
+    const main = document.querySelector('#main');
+    const lightbox = document.getElementById("lightbox_carousel");
+
+    lightbox.style.display = 'none';
+    headerPage.setAttribute('aria-hidden', 'false');
+    main.setAttribute('aria-hidden', 'false');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.querySelector('body').style.overflow = 'auto';
+    document.querySelector('#divMedia').innerHTML = "";
 }
- 
- 
-const setNodeAttributes = (lastItem, currentItem) => {
-   $(lastItem).css('display', 'none')
-   $(currentItem).css('display', 'block')
-   $(lastItem).attr('aria-hidden', 'true')
-   $(currentItem).attr('aria-hidden', 'false')
+
+function getImageSlide(src){
+    const img = document.createElement('img');
+    img.setAttribute('src', src);
+
+    return img;
 }
- 
- 
-// Events
-prevBtn.addEventListener('click', function() {
-    goToPreviousSlide()
-})
- 
-nextBtn.addEventListener('click', function() {
-   goToNextSlide()
-})
- 
- 
-document.addEventListener("keydown", function(e) {
-   const keyCode = e.keyCode ? e.keyCode : e.which
- 
-   if (keyCode === 39) {
-       goToNextSlide()
-   } else if (keyCode === 37) {
-       goToPreviousSlide()
-   }
-})
+
+function getVideoSlide(src) {
+    const video = document.createElement('video');
+    const source = document.createElement('source');
+    video.controls = true;
+    source.setAttribute('src', src);
+    video.appendChild(source)
+
+    return video
+}
+
+function getSlideForBox(slide, mediaPlace){
+    mediaPlace.innerHTML = "";
+    const mediaTitle = document.createElement('p');
+    //console.log(slide.childNodes[0].childNodes[0].classList.contains('image'))
+    console.log(slide.childNodes[1])
+    if(slide.childNodes[0].childNodes[0].classList.contains('image')){
+        const img = getImageSlide(slide.childNodes[0].childNodes[0].getAttribute('src'));
+        mediaPlace.appendChild(img);
+
+        mediaTitle.innerText = slide.childNodes[1].childNodes[0].innerText;
+        mediaPlace.appendChild(mediaTitle);
+    } else if(slide.childNodes[0].childNodes[1].classList.contains('video')){
+        const video = getVideoSlide(slide.childNodes[0].childNodes[1].childNodes[0].getAttribute('src'));
+        mediaPlace.appendChild(video);
+
+        mediaTitle.innerText = slide.childNodes[1].childNodes[0].innerText;
+        mediaPlace.appendChild(mediaTitle);
+    }
+}
+
+function getLightbox(){
+    let articles = document.querySelectorAll('article');
+    let position;
+
+    let mediaPlace = document.querySelector('#divMedia');
+
+    articles.forEach(article => {
+        article.addEventListener("click", () => {
+            openLightbox()
+            const mediaTitle = document.createElement('p');
+            if(article.childNodes[0].childNodes[0].classList.contains('image')){
+                const img = getImageSlide(article.childNodes[0].childNodes[0].getAttribute('src'));
+                mediaPlace.appendChild(img);
+                mediaTitle.innerText = article.childNodes[1].childNodes[0].innerText;
+                mediaPlace.appendChild(mediaTitle);
+                
+                position = article.getAttribute('data-position');
+                console.log(position);
+            } else if(article.childNodes[0].childNodes[1].classList.contains('video')){
+                const video = getVideoSlide(article.childNodes[0].childNodes[1].childNodes[0].getAttribute('src'));
+                mediaPlace.appendChild(video);
+                console.log(article.childNodes[1].childNodes[0].innerText)
+                mediaTitle.innerText = article.childNodes[1].childNodes[0].innerText;
+                //mediaTitle.innerText = article.childNodes[0].childNodes[2].childNodes[0].innerText;
+                mediaPlace.appendChild(mediaTitle);
+
+                position = article.getAttribute('data-position');
+                console.log(position);
+            }
+
+        })
+    });
+
+    const goToNextSlide = () => {
+        if(position < articles.length-1){
+            position = parseInt(position);
+            position += 1;
+            const nextSlide = articles[position];
+
+
+            getSlideForBox(nextSlide, mediaPlace);
+        } else if(position == articles.length-1){
+            position = 0;
+            const nextSlide = articles[position];
+
+            getSlideForBox(nextSlide, mediaPlace);
+        }
+    }
+
+    const goToPreviousSlide = () => {
+        if(position > 0){
+            position -= 1;
+            const previousSlide = articles[position];
+            getSlideForBox(previousSlide, mediaPlace);
+        } else if(position == 0){
+            position = articles.length-1;
+            const previousSlide = articles[position];
+            getSlideForBox(previousSlide, mediaPlace);
+        }
+    }
+
+    $prevBtn.click(function() {
+        goToPreviousSlide();
+    })
+      
+    $nextBtn.click(function() {
+        goToNextSlide();
+    })
+
+    $(document).keydown(function(e) {
+        const keyCode = e.keyCode ? e.keyCode : e.which
+      
+        if (keyCode === 39) {
+            goToNextSlide();
+        } else if (keyCode === 37) {
+            goToPreviousSlide();
+        } else if(document.getElementById("lightbox_carousel").style.display === "flex" && e.keyCode === 27){
+            closeLightbox();
+        }
+    })
+
+    
+}

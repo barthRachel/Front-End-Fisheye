@@ -15,6 +15,8 @@ async function getPhotographersInfo(photographerId) {
 function getUserHeaderDOM(data) {
     const { name, portrait, city, country, tagline } = data;
 
+    document.title = `${name} - Fisheye`;
+
     const picture = `assets/photographers/${portrait}`;
     // creation of DOM elements
     //const heart = document.createElement('i');
@@ -59,14 +61,27 @@ function getUserHeaderDOM(data) {
 
 function getUserMedia(photographerData) {
     const mediaSection = document.querySelector('.photograph-media');
+    //const carousel = document.querySelector('ul.carousel');
 
     const photographerInfo = photographerData.photographerInfo;
     const photographerMedias = photographerData.photographerMedias;
+    let position = 0;
 
     photographerMedias.forEach((media) => {
         const mediaModel = mediaFactory(media, photographerInfo.name);
+        mediaModel.setAttribute('data-position', position);
         mediaSection.appendChild(mediaModel);
+        position++;
+        //const slide = createSlide(media, photographerInfo.name);
+        //carousel.appendChild(slide);
+        //console.log(media)
     })
+
+    //document.querySelector('.carousel-item').classList.add('activeSlide');
+    //document.querySelector('.carousel-item').classList.remove('hiddenSlide');
+
+    //console.log(document.querySelector(".carousel-item"));
+    //console.log(document.querySelectorAll('.carousel-item')[document.querySelectorAll('.carousel-item').length-1])
 }
 
 function getUserLikesPrice(data) {
@@ -90,6 +105,8 @@ async function displayDataPhotographer(photographerData) {
     getUserMedia(photographerData)
 
     getUserLikesPrice(photographerData.photographerInfo);
+
+    getLightbox();
 }
 
 async function init() {

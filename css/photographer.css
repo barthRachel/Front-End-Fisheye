@@ -92,7 +92,6 @@
 /** Media **/
 
 .photograph-media {
-    border: 2px solid red;
     margin-top: 50px;
 
     display: grid;
@@ -102,20 +101,29 @@
 }
 
 .photograph-media article {
-    border: 2px solid green;
     /*width: 350px;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    margin-top: 30px; 
+}
+
+.photograph-media article button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.photograph-media article:nth-child(1), .photograph-media article:nth-child(2), .photograph-media article:nth-child(3) {
+    margin-top: 0;
 }
 
 .photograph-media article img, .photograph-media article video {
     width: 350px;
     height: 300px;
     object-fit: cover;
-    border: 2px solid coral;
     border-radius: 5px;
 }
 
@@ -124,14 +132,12 @@
 }
 
 .photograph-media article aside {
-    border: 2px solid orange;
     width: 350px;
     display: flex;
     justify-content: space-between;
 }
 
 .photograph-media article aside p {
-    border: 2px solid lightblue;
     font-size: 24px;
     font-weight: 400;
     color: #901C1C;
@@ -188,7 +194,7 @@
     margin-bottom: 20px;
 }
 
-.modal header button {
+.modal header button, .carousel header button {
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -250,7 +256,54 @@ form textarea {
 
 /** Lightbox **/
 #lightbox_carousel {
-    
+    width: 99.9vw;
+    height: 99.9vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(202, 202, 202, 0.9);
+
+    overflow: auto;
+
+    display: none;
+    justify-content: center;
+}
+
+.carousel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+
+.carousel header {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+.carouselContent {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+#divMedia p {
+    color: #901C1C;
+    font-size: 24px;
+}
+
+#divMedia img, #divMedia video {
+    max-width: 900px;
+    max-height: 80vh;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .sr-only {
@@ -265,67 +318,20 @@ form textarea {
    border:0
 }
 
-.carousel {
-   position: relative;
-   padding: 0;
-   margin: 0;
-}
 
-.carousel-item {
-   height: 100%;
-   width: auto;
-   margin-top: 20px;
-   margin-bottom: 20px;
-   list-style-type: none;
-   border: 2px solid red;
-}
-
-.carousel > .carousel-item > .carousel-media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.carousel > .carousel-item > .carousel-media > img {
-    width: 150px;
-    height: 150px;
-}
-
-.item-0 {
-   background-color: tomato;
-}
- 
-.item-1 {
-   background-color: blue;
-   display: none;
-}
- 
-.item-2 {
-   background-color: green;
-   display: none;
-}
-
-.img {
-   height: 40px;
-   width: 40px;
-   background-color: white;
-   border-radius: 50%;
-   display: flex;
-   position: absolute;
-   top: 50%;
-   transform: translateY(-50%);
-   cursor: pointer;
-   align-items: center;
-   justify-content: center;
-}
- 
 .prev-image {
    left: 20px;
 }
 
-.fa-arrow-circle-left,
-.fa-arrow-circle-right {
-   font-size: 30px!important;
+.fa-chevron-right,
+.fa-chevron-left {
+   font-size: 48px!important;
+   color: #901C1C;
+}
+
+.fa-chevron-right:hover,
+.fa-chevron-left:hover {
+    cursor: pointer;
 }
 
 .next-image {

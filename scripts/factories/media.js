@@ -33,36 +33,42 @@ function getMediaDOM(data) {
 }
 
 function getImageCard(data, name) {
-    console.log("Image");
+    //console.log("Image");
 
     let firstname = name.split(' ')[0].split('-').join(' ');
 
     const article = getMediaDOM(data);
+    const button = document.createElement('button');
     const img = document.createElement('img');
 
+    button.setAttribute('aria-label', `${data.title} by ${name}`);
     img.setAttribute("src", `assets/images/${firstname}/${data.image}`);
-    img.setAttribute("alt", `${data.title} by ${name}`)
-    img.setAttribute('aria-label', `${data.title} by ${name}`)
+    img.setAttribute("alt", `${data.title} by ${name}`);
+    img.classList.add('image');
 
-    article.insertBefore(img, article.firstChild);
+    button.appendChild(img)
+    article.insertBefore(button, article.firstChild);
     return(article);
 }
 
 function getVideoCard(data, name) {
-    console.log("Video");
+    //console.log("Video");
 
     let firstname = name.split(' ')[0].split('-').join(' ');
 
     const article = getMediaDOM(data);
+    const button = document.createElement('button');
     const video = document.createElement('video');
     const source = document.createElement('source');
 
+    button.setAttribute('aria-label', `${data.title} by ${name}`);
     source.setAttribute("src", `assets/images/${firstname}/${data.video}`);
-    video.setAttribute('aria-label', `${data.title} by ${name}`);
+    video.classList.add('video');
     video.controls = true;
 
     video.appendChild(source);
-    article.insertBefore(video, article.firstChild);
+    button.appendChild(video)
+    article.insertBefore(button, article.firstChild);
 
     return(article);
 }

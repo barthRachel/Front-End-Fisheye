@@ -43,7 +43,8 @@
 				<header>
           <h1 id="Contact">Contactez-moi <br/> <span id="photographerNameForModal"></span></h1>
           <!--<img id="modalCloseButton" src="assets/icons/close.svg" onclick="closeModal()" />-->
-          <button aria-label="Close contact form" id="modalCloseButton" onclick="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></button>
+          <!--<button aria-label="Close contact form" id="modalCloseButton" onclick="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></button>-->
+          <button aria-label="Close contact form" id="modalCloseButton" onclick="closeModal()"><img src="assets/icons/close.svg"/></button>
         </header>
 				<form>
 					<div>
@@ -74,71 +75,38 @@
 
     <div id="lightbox_carousel" role="dialog" aria-hidden="true" aria-describedby="Carousel">
       <div class="carousel">
-        <h1 class="sr-only">Carousel</h1>
+        <header>
+          <h1 class="sr-only">Carousel</h1>
+          <button aria-label="Close dialog" id="lightboxCloseButton" onclick="closeLightbox()"><img src="assets/icons/closeLightbox.png"/></button>
+        </header>
 
-        <ul class="carousel" aria-label="Image closeup view">
-          <li class="carousel-item item-0" aria-hidden="false">
-            <div role="button" class="controls controls-left">
-              <span class="img prev-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
-              </span>
-              <p class="sr-only">Previous</p>
-            </div>
-            <div role="button" class="controls controls-right">
-              <span class="img next-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
-              </span>
-              <p class="sr-only">Next</p>
-            </div>
-
-            <div class="carousel-media">
-              <img src="assets/images/Marcel/Architecture_Corner_Room.jpg">
-            </div>
-          </li>
-
-          <li class="carousel-item item-1" aria-hidden="true">
-            <div role="button" class="controls controls-left">
-              <span class="img prev-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
-              </span>
-              <p class="sr-only">Previous</p>
-            </div>
-            <div role="button" class="controls controls-right">
-              <span class="img next-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
-              </span>
-              <p class="sr-only">Next</p>
-            </div>
-            <div class="carousel-media">
-              <img src="assets/images/Marcel/Architecture_Corner_Room.jpg">
-            </div>
-          </li>
-          <li class="carousel-item item-2" aria-hidden="true">
-            <div role="button" class="controls controls-left">
-              <span class="img prev-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-left"></i>
-              </span>
-              <p class="sr-only">Previous</p>
-            </div>
-            <div role="button" class="controls controls-right">
-              <span class="img next-image">
-                <i aria-hidden="true" class="fa fa-arrow-circle-right"></i>
-              </span>
-              <p class="sr-only">Next</p>
-            </div>
-            <div class="carousel-media">
-              <img src="assets/images/Marcel/Architecture_Corner_Room.jpg">
-            </div>
-          </li>
-        </ul>
-
+        <div class="carouselContent">
+          <div role="button" class="controls controls-left">
+            <span class="img prev-image">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </span>
+            <p class="sr-only">Previous image</p>
+          </div>
+  
+          <div id="divMedia">
+          </div>
+  
+          <div role="button" class="controls controls-right">
+            <span class="img next-image">
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </span>
+            <p class="sr-only">Next image</p>
+          </div>
+        </div>
       </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
-    <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/lightbox.js"></script>
   </body>
 </html>

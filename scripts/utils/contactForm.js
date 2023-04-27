@@ -44,7 +44,7 @@ function sendInfo(){
 }
 
 document.addEventListener('keydown', (e) => {
-    if(e.keyCode === 27){
+    if(document.getElementById("contact_modal").style.display === "flex" && e.keyCode === 27){
         closeModal();
     }
 })
