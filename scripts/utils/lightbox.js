@@ -49,20 +49,23 @@ function getVideoSlide(src) {
 function getSlideForBox(slide, mediaPlace){
     mediaPlace.innerHTML = "";
     const mediaTitle = document.createElement('p');
-    //console.log(slide.childNodes[0].childNodes[0].classList.contains('image'))
-    console.log(slide.childNodes[1])
     if(slide.childNodes[0].childNodes[0].classList.contains('image')){
         const img = getImageSlide(slide.childNodes[0].childNodes[0].getAttribute('src'));
         mediaPlace.appendChild(img);
 
         mediaTitle.innerText = slide.childNodes[1].childNodes[0].innerText;
         mediaPlace.appendChild(mediaTitle);
+
+        img.setAttribute('alt', slide.childNodes[0].getAttribute('aria-label'))
+
     } else if(slide.childNodes[0].childNodes[1].classList.contains('video')){
         const video = getVideoSlide(slide.childNodes[0].childNodes[1].childNodes[0].getAttribute('src'));
         mediaPlace.appendChild(video);
 
         mediaTitle.innerText = slide.childNodes[1].childNodes[0].innerText;
         mediaPlace.appendChild(mediaTitle);
+
+        video.setAttribute('alt', slide.childNodes[0].getAttribute('aria-label'))
     }
 }
 
@@ -73,7 +76,8 @@ function getLightbox(){
     let mediaPlace = document.querySelector('#divMedia');
 
     articles.forEach(article => {
-        article.addEventListener("click", () => {
+        const buttonForLightbox = article.childNodes[0];
+        buttonForLightbox.addEventListener("click", () => {
             openLightbox()
             const mediaTitle = document.createElement('p');
             if(article.childNodes[0].childNodes[0].classList.contains('image')){
@@ -81,19 +85,20 @@ function getLightbox(){
                 mediaPlace.appendChild(img);
                 mediaTitle.innerText = article.childNodes[1].childNodes[0].innerText;
                 mediaPlace.appendChild(mediaTitle);
+
+                img.setAttribute('alt', article.childNodes[0].getAttribute('aria-label'))
                 
                 position = article.getAttribute('data-position');
-                console.log(position);
             } else if(article.childNodes[0].childNodes[1].classList.contains('video')){
                 const video = getVideoSlide(article.childNodes[0].childNodes[1].childNodes[0].getAttribute('src'));
                 mediaPlace.appendChild(video);
-                console.log(article.childNodes[1].childNodes[0].innerText)
+
                 mediaTitle.innerText = article.childNodes[1].childNodes[0].innerText;
-                //mediaTitle.innerText = article.childNodes[0].childNodes[2].childNodes[0].innerText;
+                
                 mediaPlace.appendChild(mediaTitle);
+                video.setAttribute('alt', article.childNodes[0].getAttribute('aria-label'))
 
                 position = article.getAttribute('data-position');
-                console.log(position);
             }
 
         })
@@ -104,7 +109,6 @@ function getLightbox(){
             position = parseInt(position);
             position += 1;
             const nextSlide = articles[position];
-
 
             getSlideForBox(nextSlide, mediaPlace);
         } else if(position == articles.length-1){

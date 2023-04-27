@@ -145,6 +145,14 @@
     padding: 0;
 }
 
+.notLike {
+    color: #DB8876;
+}
+
+.isLike {
+    color: #901C1C;
+}
+
 .photograph-media article aside p:nth-child(1) {
     flex: 1.5;
 } 

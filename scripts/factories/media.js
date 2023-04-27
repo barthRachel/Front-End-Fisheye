@@ -23,7 +23,7 @@ function getMediaDOM(data) {
     const nameParagraph = document.createElement('p');
     const likeParagraph = document.createElement('p');
     nameParagraph.textContent = data.title;
-    likeParagraph.innerHTML = data.likes + ` <i class='fa fa-heart' aria-label="likes"></i>`;
+    likeParagraph.innerHTML = data.likes + ` <i class='fa fa-heart notLike' aria-label="likes"></i>`;
     aside.appendChild(nameParagraph);
     aside.appendChild(likeParagraph);
     article.appendChild(aside);
@@ -42,6 +42,7 @@ function getImageCard(data, name) {
     const img = document.createElement('img');
 
     button.setAttribute('aria-label', `${data.title} by ${name}`);
+    button.classList.add('mediaLightbox');
     img.setAttribute("src", `assets/images/${firstname}/${data.image}`);
     img.setAttribute("alt", `${data.title} by ${name}`);
     img.classList.add('image');
@@ -62,6 +63,7 @@ function getVideoCard(data, name) {
     const source = document.createElement('source');
 
     button.setAttribute('aria-label', `${data.title} by ${name}`);
+    button.classList.add('mediaLightbox');
     source.setAttribute("src", `assets/images/${firstname}/${data.video}`);
     video.classList.add('video');
     video.controls = true;
