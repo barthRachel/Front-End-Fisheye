@@ -1,5 +1,6 @@
 //Mettre le code JavaScript lié à la page photographer.html
 let numberofLikes = document.querySelector('#numberOfLikes');
+const idInUrl = window.location.search.split("=")[1];
 
 async function getPhotographersInfo(photographerId) {
     let allData = await fetch('data/photographers.json');
@@ -63,7 +64,9 @@ function getUserMedia(photographerData) {
     const mediaSection = document.querySelector('.photograph-media');
 
     const photographerInfo = photographerData.photographerInfo;
-    const photographerMedias = photographerData.photographerMedias;
+    let photographerMedias = photographerData.photographerMedias;
+    photographerMedias = getMediaSorted(photographerMedias, document.querySelector('#dropdown-title').innerText);
+    //photographerMedias.sort((a,b) => b.likes - a.likes)
     
     let position = 0;
     let numberofLikesInt = 0;
@@ -87,7 +90,6 @@ function getUserPrice(data) {
 }
 
 async function displayDataPhotographer(photographerData) {
-    console.log(photographerData.photographerMedias)
     const photographerHeader = document.querySelector('.photograph-header');
     const userHeaderDOM = getUserHeaderDOM(photographerData.photographerInfo);
     photographerHeader.appendChild(userHeaderDOM.infosDiv);
@@ -102,7 +104,7 @@ async function displayDataPhotographer(photographerData) {
 }
 
 async function init() {
-    const idInUrl = window.location.search.split("=")[1];
+    
     const photographersInfo = await getPhotographersInfo(idInUrl);
     displayDataPhotographer(photographersInfo);
 

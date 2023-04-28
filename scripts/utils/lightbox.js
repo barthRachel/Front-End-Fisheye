@@ -1,13 +1,13 @@
-// Global var
-const $prevBtn = $('.prev-image');
-const $nextBtn = $('.next-image');
+//global variables
+const prevButton = document.querySelector('.prev-image');
+const nextButton = document.querySelector('.next-image');
+
+var headerPage = document.querySelector('#headerPage');
+var main = document.querySelector('#main');
+var lightbox = document.getElementById("lightbox_carousel");
+var lightboxCloseButton = document.querySelector('#lightboxCloseButton');
 
 function openLightbox(){
-    const headerPage = document.querySelector('#headerPage');
-    const main = document.querySelector('#main');
-    const lightbox = document.getElementById("lightbox_carousel");
-    const lightboxCloseButton = document.querySelector('#lightboxCloseButton');
-
     lightbox.style.display = 'flex';
     headerPage.setAttribute('aria-hidden', 'true');
     main.setAttribute('aria-hidden', 'true');
@@ -17,10 +17,6 @@ function openLightbox(){
 }
 
 function closeLightbox(){
-    const headerPage = document.querySelector('#headerPage');
-    const main = document.querySelector('#main');
-    const lightbox = document.getElementById("lightbox_carousel");
-
     lightbox.style.display = 'none';
     headerPage.setAttribute('aria-hidden', 'false');
     main.setAttribute('aria-hidden', 'false');
@@ -33,7 +29,7 @@ function getImageSlide(src){
     const img = document.createElement('img');
     img.setAttribute('src', src);
 
-    return img;
+    return(img);
 }
 
 function getVideoSlide(src) {
@@ -41,9 +37,9 @@ function getVideoSlide(src) {
     const source = document.createElement('source');
     video.controls = true;
     source.setAttribute('src', src);
-    video.appendChild(source)
+    video.appendChild(source);
 
-    return video
+    return(video);
 }
 
 function getSlideForBox(slide, mediaPlace){
@@ -131,17 +127,11 @@ function getLightbox(){
         }
     }
 
-    $prevBtn.click(function() {
-        goToPreviousSlide();
-    })
-      
-    $nextBtn.click(function() {
-        goToNextSlide();
-    })
+    prevButton.addEventListener('click', goToPreviousSlide);
+    nextButton.addEventListener('click', goToNextSlide);
 
-    $(document).keydown(function(e) {
-        const keyCode = e.keyCode ? e.keyCode : e.which
-      
+    document.addEventListener('keydown', (e) => {
+        const keyCode = e.keyCode ? e.keyCode : e.which;
         if (keyCode === 39) {
             goToNextSlide();
         } else if (keyCode === 37) {
@@ -149,5 +139,6 @@ function getLightbox(){
         } else if(document.getElementById("lightbox_carousel").style.display === "flex" && e.keyCode === 27){
             closeLightbox();
         }
+
     })
 }

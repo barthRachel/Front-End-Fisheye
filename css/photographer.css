@@ -69,24 +69,82 @@
     cursor: pointer;
 }
 
+/** Filtres **/
+
 .filter-medias {
     margin: 0 100px;
+    display: block;
 }
 
-.filter-medias label, .filter-medias select  {
+.sort-title {
     font-size: 18px;
     font-weight: 700;
+    margin-right: 25px;
 }
 
-.filter-medias label {
-    margin-right: 12px;
+.dropdown {
+    display: inline-block;
+    position: relative;
 }
 
-.filter-medias select {
+.dropdown :hover {
+    cursor: pointer;
+}
+
+#dropdown-title {
+    margin-right: 25px;
+}
+
+.dropdown-arrow {
+    transform: rotate(-180deg);
+}
+
+.dropbtn {
+    font-size: 18px;
+    font-weight: 700;
     background-color: #901C1C;
     color: white;
-    padding: 20px;
+    border: none;
     border-radius: 5px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 23px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    z-index: 10;
+    display: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    list-style: none;
+    width: 100%;
+}
+
+.sort-button {
+    width: 100%;
+    border-radius: 0;
+    background-color: #901C1C;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: none;
+    padding: 20px 15px;
+    border: none;
+    border-top: 1px solid white;
+    border-radius: 0 0 5px 5px;
+}
+
+.li-dropdown button:hover {
+    cursor: pointer;
+}
+
+.sort-name {
+    display: block;
 }
 
 /** Media **/
@@ -96,8 +154,7 @@
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 100px;
-    margin-bottom: 70px;
+    margin: 100px 0px;
 }
 
 .photograph-media article {
@@ -312,6 +369,11 @@ form textarea {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.controls {
+    background-color: transparent;
+    border: none;
 }
 
 .sr-only {

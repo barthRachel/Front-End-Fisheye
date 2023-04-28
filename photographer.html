@@ -20,12 +20,57 @@
       </section>
 
       <section class="filter-medias">
-        <label for="filter-select" aria-label="Order by">Trier par </label>
 
-        <select name="filters" id="filter-select">
-          <option value="popularity">Popularité</option>
-          <option value="title">Titre</option>
-        </select>
+        <div>
+					<span id="sort-title" class="sort-title">Trier par</span>
+					<div role="menu" class="dropdown">
+						<button
+							class="dropdown-toggle close dropbtn"
+							role="menuitem"
+							type="button"
+							aria-labelledby="dropdown-title"
+							tabindex="1"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+							aria-haspopup="listbox"
+							aria-controls="sort-dropdown"
+						>
+							<span id="dropdown-title">Popularité</span>
+							<img src="assets/icons/dropdown.png" alt="" class="dropdown-arrow" aria-hidden="true" />
+						</button>
+						<ul id="sort-dropdown" class="dropdown-menu button-group" aria-labelledby="sort-title">
+							<li class="li-dropdown">
+								<button
+									id="sort-by-popularity"
+									role="menuitem"
+									type="button"
+									aria-labelledby="sort-popularity"
+									class="sort-button is-checked"
+									tabindex="1"
+									data-sort-value="popularity"
+									onclick="sort('Popularité')"
+								>
+									<span id="sort-popularity" class="sort-name">Popularité</span>
+								</button>
+							</li>
+							<li class="li-dropdown">
+								<button
+									id="sort-by-name"
+									role="menuitem"
+									type="button"
+									aria-labelledby="sort-name"
+									class="sort-button button"
+									tabindex="1"
+									data-sort-value="title"
+									onclick="sort('Titre')"
+								>
+									<span id="sort-name" class="sort-name">Titre</span>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+
       </section>
 
       <section class="photograph-media">
@@ -81,32 +126,31 @@
         </header>
 
         <div class="carouselContent">
-          <div role="button" class="controls controls-left">
-            <span class="img prev-image">
+          <button class="controls prev-image">
+            <span>
               <i class="fa fa-chevron-left" aria-hidden="true"></i>
             </span>
             <p class="sr-only">Previous image</p>
-          </div>
+          </button>
   
           <div id="divMedia">
           </div>
   
-          <div role="button" class="controls controls-right">
-            <span class="img next-image">
+          <button class="controls next-image">
+            <span>
               <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </span>
             <p class="sr-only">Next image</p>
-          </div>
+          </button>
         </div>
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/utils/lightbox.js"></script>
+    <script src="scripts/utils/sort.js"></script>
   </body>
 </html>
