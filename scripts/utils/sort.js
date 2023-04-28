@@ -37,17 +37,12 @@ async function sort(filter){
 
     const infos = await getPhotographersInfo(idInUrl);
     const mediaSorted = getUserMedia(infos);
-
     toggleSorter();
     likeDislike();
     return mediaSorted;
 }
 
 function getMediaSorted(photographerMedias, filter){
-    if(filter === "Popularité"){
-        return photographerMedias.sort((a,b) => b.likes - a.likes);
-    } else if(filter === "Titre") {
-        return photographerMedias.sort((a,b) => a.title.toString().localeCompare(b.title.toString()));
-    }
+    return(filter === "Popularité" ? photographerMedias.sort((a,b) => b.likes - a.likes) : photographerMedias.sort((a,b) => a.title.toString().localeCompare(b.title.toString())));
 }
 

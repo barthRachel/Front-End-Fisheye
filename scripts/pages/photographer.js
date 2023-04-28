@@ -1,6 +1,7 @@
-//Mettre le code JavaScript lié à la page photographer.html
-let numberofLikes = document.querySelector('#numberOfLikes');
+//Mettre le code JavaScript lié à lanumberofLikes page photographer.html
+let numberTotalOfLikes = document.querySelector('#numberOfLikes');
 const idInUrl = window.location.search.split("=")[1];
+let likesTab = [];
 
 async function getPhotographersInfo(photographerId) {
     let allData = await fetch('data/photographers.json');
@@ -72,13 +73,24 @@ function getUserMedia(photographerData) {
     let numberofLikesInt = 0;
 
     photographerMedias.forEach((media) => {
+        let mediaLikesInfo = {id : media.id, likes : media.likes, isLike : false};
+        if(likesTab.map(function(x) {return x.id; }).indexOf(mediaLikesInfo.id) === -1){
+            likesTab.push(mediaLikesInfo);
+        }
         const mediaModel = mediaFactory(media, photographerInfo.name);
         mediaModel.setAttribute('data-position', position);
         mediaSection.appendChild(mediaModel);
         numberofLikesInt = numberofLikesInt + media.likes;
-        numberofLikes.innerText = numberofLikesInt;
+        numberTotalOfLikes.innerText = numberofLikesInt;
         position++;
+
+        // let mediaLikesInfo = {id : media.id, likes : media.likes};
+        // if(likesTab.map(function(x) {return x.id; }).indexOf(mediaLikesInfo.id) === -1){
+        //     likesTab.push(mediaLikesInfo);
+        // }
     })
+
+    
 }
 
 function getUserPrice(data) {
@@ -104,7 +116,6 @@ async function displayDataPhotographer(photographerData) {
 }
 
 async function init() {
-    
     const photographersInfo = await getPhotographersInfo(idInUrl);
     displayDataPhotographer(photographersInfo);
 

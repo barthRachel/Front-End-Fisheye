@@ -7,7 +7,7 @@ function mediaFactory(data, name) {
     } else if (extension === "mp4" || extension === "webm") {
         return getVideoCard(data, name);
     } else {
-        console.log("Unknon type");
+        return("Unknon type");
     }
 
 }
@@ -18,7 +18,9 @@ function getMediaDOM(data) {
     const nameParagraph = document.createElement('p');
     const likeParagraph = document.createElement('p');
     nameParagraph.textContent = data.title;
-    likeParagraph.innerHTML = `<span class='likesNumber'>${data.likes}</span> <i class='fa fa-heart likeButton notLike' aria-label="likes" ></i>`;
+    nameParagraph.classList.add('titleMedia')
+    let likesEl = (likesTab.filter(el => el.id === data.id))
+    likeParagraph.innerHTML = `<span class='likesNumber'>${likesEl[0].likes}</span> <button><i id='${data.id}' class='fa fa-heart likeButton' aria-label="likes" ></i></button>`;
     aside.appendChild(nameParagraph);
     aside.appendChild(likeParagraph);
     article.appendChild(aside);
@@ -56,8 +58,7 @@ function getVideoCard(data, name) {
     button.classList.add('mediaLightbox');
     source.setAttribute("src", `assets/images/${firstname}/${data.video}`);
     video.classList.add('video');
-    video.controls = true;
-
+    video.preload="metadata";
     video.appendChild(source);
     button.appendChild(video)
     article.insertBefore(button, article.firstChild);
@@ -68,26 +69,44 @@ function getVideoCard(data, name) {
 function likeDislike() {
     const likeButtons = document.querySelectorAll('.likeButton');
     const spanLikes = document.querySelectorAll('.likesNumber');
-    let likeNumber, likeTotal;
+    let likeMedia = 0 , likeTotal = 0;
+
+    for(let i = 0 ; i < likesTab.length ; i++){
+        if(likesTab[i].isLike === true){
+            document.getElementById(`${likesTab[i].id}`).classList.add('isLike');
+
+            likeTotal += likesTab[i].likes
+            
+        } else {
+            likeTotal += likesTab[i].likes
+        }
+    }
     
     for(let i =0 ; i < likeButtons.length ; i++){
         likeButtons[i].addEventListener('click', (e) => {
-            if(e.target.classList.contains('notLike')){
-                e.target.classList.remove('notLike');
+            if((likesTab.filter(el => el.id == e.target.getAttribute('id')))[0].isLike === false){
                 e.target.classList.add('isLike');
 
-                likeNumber = parseInt(spanLikes[i].textContent) + 1;
-                likeTotal = parseInt(numberofLikes.textContent) + 1;
+                likeMedia = parseInt(spanLikes[i].textContent) + 1;
+                likeTotal = parseInt(numberTotalOfLikes.textContent) + 1;
+                
+                (likesTab.filter(el => el.id == e.target.getAttribute('id')))[0].likes = likeMedia;
+                (likesTab.filter(el => el.id == e.target.getAttribute('id')))[0].isLike = true;
+
             } else {
                 e.target.classList.remove('isLike');
-                e.target.classList.add('notLike');
 
-                likeNumber = parseInt(spanLikes[i].textContent) - 1;
-                likeTotal = parseInt(numberofLikes.textContent) - 1;
+                likeMedia = parseInt(spanLikes[i].textContent) - 1;
+                likeTotal = parseInt(numberTotalOfLikes.textContent) - 1;
+
+                (likesTab.filter(el => el.id == e.target.getAttribute('id')))[0].likes = likeMedia;
+                (likesTab.filter(el => el.id == e.target.getAttribute('id')))[0].isLike = false;
             }
 
-            numberofLikes.innerText = likeTotal;
-            spanLikes[i].innerText = likeNumber;
+            numberTotalOfLikes.innerText = likeTotal;
+            spanLikes[i].innerText = (likesTab.filter(el => el.id == e.target.getAttribute('id')))[0].likes;
         })
     }
+
+    numberTotalOfLikes.innerText = likeTotal;
 }

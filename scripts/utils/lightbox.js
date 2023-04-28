@@ -25,43 +25,28 @@ function closeLightbox(){
     document.querySelector('#divMedia').innerHTML = "";
 }
 
-function getImageSlide(src){
-    const img = document.createElement('img');
-    img.setAttribute('src', src);
-
-    return(img);
-}
-
-function getVideoSlide(src) {
-    const video = document.createElement('video');
-    const source = document.createElement('source');
-    video.controls = true;
-    source.setAttribute('src', src);
-    video.appendChild(source);
-
-    return(video);
-}
-
-function getSlideForBox(slide, mediaPlace){
-    mediaPlace.innerHTML = "";
-    const mediaTitle = document.createElement('p');
-    if(slide.childNodes[0].childNodes[0].classList.contains('image')){
-        const img = getImageSlide(slide.childNodes[0].childNodes[0].getAttribute('src'));
+function createSlide(article, mediaPlace, mediaTitle) {
+    if(article.childNodes[0].childNodes[0].classList.contains('image')){
+        const img = document.createElement('img');
+        img.setAttribute('src', article.childNodes[0].childNodes[0].getAttribute('src'))
+        
         mediaPlace.appendChild(img);
-
-        mediaTitle.innerText = slide.childNodes[1].childNodes[0].innerText;
+        mediaTitle.innerText = article.childNodes[1].childNodes[0].innerText;
         mediaPlace.appendChild(mediaTitle);
 
-        img.setAttribute('alt', slide.childNodes[0].getAttribute('aria-label'))
-
-    } else if(slide.childNodes[0].childNodes[1].classList.contains('video')){
-        const video = getVideoSlide(slide.childNodes[0].childNodes[1].childNodes[0].getAttribute('src'));
+        img.setAttribute('alt', article.childNodes[0].getAttribute('aria-label'))
+    } else if(article.childNodes[0].childNodes[1].classList.contains('video')){
+        const video = document.createElement('video');
+        const source = document.createElement('source');
+        video.controls = true;
+        source.setAttribute('src', article.childNodes[0].childNodes[1].childNodes[0].getAttribute('src'));
+        video.appendChild(source);
+        
         mediaPlace.appendChild(video);
-
-        mediaTitle.innerText = slide.childNodes[1].childNodes[0].innerText;
+        mediaTitle.innerText = article.childNodes[1].childNodes[0].innerText;
         mediaPlace.appendChild(mediaTitle);
 
-        video.setAttribute('alt', slide.childNodes[0].getAttribute('aria-label'))
+        video.setAttribute('alt', article.childNodes[0].getAttribute('aria-label'))
     }
 }
 
@@ -74,56 +59,46 @@ function getLightbox(){
     articles.forEach(article => {
         const buttonForLightbox = article.childNodes[0];
         buttonForLightbox.addEventListener("click", () => {
-            openLightbox()
+            openLightbox();
             const mediaTitle = document.createElement('p');
-            if(article.childNodes[0].childNodes[0].classList.contains('image')){
-                const img = getImageSlide(article.childNodes[0].childNodes[0].getAttribute('src'));
-                mediaPlace.appendChild(img);
-                mediaTitle.innerText = article.childNodes[1].childNodes[0].innerText;
-                mediaPlace.appendChild(mediaTitle);
+            createSlide(article, mediaPlace, mediaTitle);
 
-                img.setAttribute('alt', article.childNodes[0].getAttribute('aria-label'))
-                
-                position = article.getAttribute('data-position');
-            } else if(article.childNodes[0].childNodes[1].classList.contains('video')){
-                const video = getVideoSlide(article.childNodes[0].childNodes[1].childNodes[0].getAttribute('src'));
-                mediaPlace.appendChild(video);
-
-                mediaTitle.innerText = article.childNodes[1].childNodes[0].innerText;
-                
-                mediaPlace.appendChild(mediaTitle);
-                video.setAttribute('alt', article.childNodes[0].getAttribute('aria-label'))
-
-                position = article.getAttribute('data-position');
-            }
-
+            position = article.getAttribute('data-position');
         })
     });
 
     const goToNextSlide = () => {
+        mediaPlace.innerHTML = "";
+        const mediaTitle = document.createElement('p');
+
         if(position < articles.length-1){
             position = parseInt(position);
             position += 1;
             const nextSlide = articles[position];
 
-            getSlideForBox(nextSlide, mediaPlace);
+            createSlide(nextSlide, mediaPlace, mediaTitle);
         } else if(position == articles.length-1){
             position = 0;
             const nextSlide = articles[position];
 
-            getSlideForBox(nextSlide, mediaPlace);
+            createSlide(nextSlide, mediaPlace, mediaTitle);
         }
     }
 
     const goToPreviousSlide = () => {
+        mediaPlace.innerHTML = "";
+        const mediaTitle = document.createElement('p');
+
         if(position > 0){
             position -= 1;
             const previousSlide = articles[position];
-            getSlideForBox(previousSlide, mediaPlace);
+
+            createSlide(previousSlide, mediaPlace, mediaTitle);
         } else if(position == 0){
             position = articles.length-1;
             const previousSlide = articles[position];
-            getSlideForBox(previousSlide, mediaPlace);
+
+            createSlide(previousSlide, mediaPlace, mediaTitle);
         }
     }
 
