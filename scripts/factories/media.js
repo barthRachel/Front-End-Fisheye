@@ -20,7 +20,7 @@ function getMediaDOM(data) {
     nameParagraph.textContent = data.title;
     nameParagraph.classList.add('titleMedia')
     let likesEl = (likesTab.filter(el => el.id === data.id))
-    likeParagraph.innerHTML = `<span class='likesNumber'>${likesEl[0].likes}</span> <button id='${data.id}' class='likeButton'><i class='fa fa-heart' aria-label="likes" ></i></button>`;
+    likeParagraph.innerHTML = `<span class='likesNumber'>${likesEl[0].likes}</span> <button><i id='${data.id}' class='fa fa-heart likeButton' aria-label="likes" ></i></button>`;
     aside.appendChild(nameParagraph);
     aside.appendChild(likeParagraph);
     article.appendChild(aside);

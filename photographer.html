@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <!--<link href="css/photographer.css" rel="stylesheet" type="text/css" />-->
+    <link href="css/style.css" rel="stylesheet" type="text/css" >
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -11,18 +10,17 @@
   </head>
   <body>
     <header id="headerPage" aria-hidden="false">
-      <a href="index.html" aria-label="Fisheye Home page"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" /></a>
+      <a href="index.html" aria-label="Fisheye Home page"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" ></a>
     </header>
 
     <main id="main" aria-hidden="false">
       <section class="photograph-header">
-        <!--<button class="contact_button" onclick="displayModal()">Contactez-moi</button>-->
       </section>
 
       <section class="filter-medias">
 
-        <div>
-					<span id="sort-title" class="sort-title">Trier par</span>
+        <div class="sorting-list">
+					<h2 id="sort-title" class="sort-title">Trier par</h2>
 					<div role="menu" class="dropdown">
 						<button
 							class="dropdown-toggle close dropbtn"
@@ -36,7 +34,7 @@
 							aria-controls="sort-dropdown"
 						>
 							<span id="dropdown-title">Popularité</span>
-							<img src="assets/icons/dropdown.png" alt="" class="dropdown-arrow" aria-hidden="true" />
+							<img src="assets/icons/dropdown.png" alt="" class="dropdown-arrow" aria-hidden="true" >
 						</button>
 						<ul id="sort-dropdown" class="dropdown-menu button-group" aria-labelledby="sort-title">
 							<li class="li-dropdown">
@@ -86,23 +84,21 @@
     <div id="contact_modal" role="dialog" aria-hidden="true" aria-describedby="Contact">
 			<div class="modal">
 				<header class="contactHeader">
-          <h1 id="Contact">Contactez-moi <br/> <span id="photographerNameForModal"></span></h1>
-          <!--<img id="modalCloseButton" src="assets/icons/close.svg" onclick="closeModal()" />-->
-          <!--<button aria-label="Close contact form" id="modalCloseButton" onclick="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></button>-->
-          <button aria-label="Close contact form" id="modalCloseButton" onclick="closeModal()"><img src="assets/icons/close.svg"/></button>
+          <h1 id="Contact">Contactez-moi <br> <span id="photographerNameForModal"></span></h1>
+          <button aria-label="Close contact form" id="modalCloseButton" onclick="closeModal()"><img src="assets/icons/close.svg" alt=""></button>
         </header>
-				<form class="contactForm" method="get" action="" >
+				<form class="contactForm" method="get" action="photographer.html" >
 					<div class="formData firstname" data-error="Veuillez entrer 2 caractères ou plus, sans chiffre.">
 						<label for="firstname">Prénom</label>
-						<input class="text-control" aria-label="First name" type="text" id="firstname" name="firstname"/>
+						<input class="text-control" aria-label="First name" type="text" id="firstname" name="firstname">
 					</div>
           <div class="formData lastname" data-error="Veuillez entrer 2 caractères ou plus, sans chiffre.">
             <label for="lastname">Nom</label>
-						<input class="text-control" aria-label="Last name" type="text" id="lastname" name="lastname"/>
+						<input class="text-control" aria-label="Last name" type="text" id="lastname" name="lastname">
           </div>
           <div class="formData email" data-error="Veuillez entrer une adresse mail valide.">
             <label for="email">Email</label>
-            <input class="text-control" aria-label="Email" type="email" id="email" name="email"/>
+            <input class="text-control" aria-label="Email" type="email" id="email" name="email">
           </div>
           <div class="formData message" data-error="Veuillez entrer un message...">
             <label for="message">Votre message</label>
@@ -123,10 +119,10 @@
       <div class="carousel">
         <header>
           <h1 class="sr-only">Carousel</h1>
-          <button aria-label="Close dialog" id="lightboxCloseButton" onclick="closeLightbox()"><img src="assets/icons/closeLightbox.png"/></button>
+          <button aria-label="Close dialog" id="lightboxCloseButton" onclick="closeLightbox()"><img src="assets/icons/closeLightbox.png" alt=""></button>
         </header>
 
-        <div class="carouselContent">
+        <div id="Carousel" class="carouselContent">
           <button class="controls prev-image">
             <span>
               <i class="fa fa-chevron-left" aria-hidden="true"></i>

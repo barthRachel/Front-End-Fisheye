@@ -82,6 +82,11 @@
     margin-right: 25px;
 }
 
+.sorting-list {
+    display: flex;
+    padding-left: 50px;
+}
+
 .dropdown {
     display: inline-block;
     position: relative;
