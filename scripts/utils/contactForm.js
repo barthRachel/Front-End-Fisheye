@@ -29,18 +29,51 @@ function closeModal() {
     document.querySelector('body').style.overflow = 'auto';
 }
 
+function validateAttribut(condition, querySelector){
+    if(condition) {
+      querySelector.setAttribute('data-error-visible', true)
+    } else {
+      querySelector.setAttribute('data-error-visible', false)
+    }
+  
+    return !condition
+}
+
 function sendInfo(){
-    let firstname = document.querySelector("#firstname").value;
-    let lastname = document.querySelector('#lastname').value;
-    let email = document.querySelector('#email').value;
-    let message = document.querySelector('#message').value;
+    let firstname = document.querySelector("#firstname");
+    let lastname = document.querySelector('#lastname');
+    let email = document.querySelector('#email');
+    let message = document.querySelector('#message');
+
+    let verifyFirst = validateAttribut(firstname.value.length <= 2 || firstname.value.match(/^\s*$/g) || firstname.value.match('[0-9]'), document.querySelector('.formData.firstname'));
+    let verifyLast = validateAttribut(lastname.value.length <= 2 || lastname.value.match(/^\s*$/g) || lastname.value.match('[0-9]'), document.querySelector('.formData.lastname'));
+    let verifyEmail = validateAttribut(!email.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) || email.value.match(/^\s*$/g), document.querySelector('.formData.email'));
+    let verifyMessage = validateAttribut(message.value.length <= 2 || message.value.match(/^\s*$/g), document.querySelector('.formData.message'))
+  
+    let verifyAll = verifyFirst && verifyLast && verifyEmail && verifyMessage;
+
+    console.log(verifyFirst)
+    console.log(verifyLast)
+    console.log(verifyEmail)
+    console.log(verifyMessage)
+
+    if(verifyAll) {
+        console.log("=============");
+        console.log(`Vous avez reçu un message de ${firstname.value} ${lastname.value}, que vous pouvez recontactez à : ${email.value}`);
+        console.log(`Message : ${message.value}`);
+        console.log("=============");
+        
+        document.querySelector('.contactForm').style.display = 'none';
+        document.querySelector('.buttonBox').style.display = 'none';
+        document.querySelector('.confirmationMessage').style.display = 'block';
+
+        setTimeout(closeModal, 2000)
+    }
+
     
-    console.log("=============");
-    console.log(`Vous avez reçu un message de ${firstname} ${lastname}, que vous pouvez recontactez à : ${email}`);
-    console.log(`Message : ${message}`);
-    console.log("=============");
+    return verifyAll
     
-    closeModal();
+    
 }
 
 document.addEventListener('keydown', (e) => {

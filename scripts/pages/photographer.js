@@ -67,7 +67,6 @@ function getUserMedia(photographerData) {
     const photographerInfo = photographerData.photographerInfo;
     let photographerMedias = photographerData.photographerMedias;
     photographerMedias = getMediaSorted(photographerMedias, document.querySelector('#dropdown-title').innerText);
-    //photographerMedias.sort((a,b) => b.likes - a.likes)
     
     let position = 0;
     let numberofLikesInt = 0;
@@ -83,14 +82,7 @@ function getUserMedia(photographerData) {
         numberofLikesInt = numberofLikesInt + media.likes;
         numberTotalOfLikes.innerText = numberofLikesInt;
         position++;
-
-        // let mediaLikesInfo = {id : media.id, likes : media.likes};
-        // if(likesTab.map(function(x) {return x.id; }).indexOf(mediaLikesInfo.id) === -1){
-        //     likesTab.push(mediaLikesInfo);
-        // }
     })
-
-    
 }
 
 function getUserPrice(data) {
