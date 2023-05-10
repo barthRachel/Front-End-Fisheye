@@ -43,6 +43,12 @@ async function sort(filter){
 }
 
 function getMediaSorted(photographerMedias, filter){
-    return(filter === "Popularité" ? photographerMedias.sort((a,b) => b.likes - a.likes) : photographerMedias.sort((a,b) => a.title.toString().localeCompare(b.title.toString())));
+    if(filter === "Popularité") {
+        return(photographerMedias.sort((a,b) => b.likes - a.likes));
+    } else if(filter === "Titre") {
+        return(photographerMedias.sort((a,b) => a.title.toString().localeCompare(b.title.toString())));
+    } else if(filter === "Date"){
+        return(photographerMedias.sort((a,b) => a.date.toString().localeCompare(b.date.toString())));
+    }
 }
 
