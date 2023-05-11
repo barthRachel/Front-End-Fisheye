@@ -48,7 +48,7 @@ function getMediaSorted(photographerMedias, filter){
     } else if(filter === "Titre") {
         return(photographerMedias.sort((a,b) => a.title.toString().localeCompare(b.title.toString())));
     } else if(filter === "Date"){
-        return(photographerMedias.sort((a,b) => a.date.toString().localeCompare(b.date.toString())));
+        return(photographerMedias.sort((a,b) => b.date.toString().localeCompare(a.date.toString())));
     }
 }
 
