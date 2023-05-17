@@ -4,7 +4,7 @@
         let dataJson = await data.json();
         let photographers = dataJson.photographers;
 
-        return ({photographers: [...photographers]})
+        return (photographers)
     }
 
     async function displayData(photographers) {
@@ -18,7 +18,7 @@
     };
 
     async function init() {
-        const { photographers } = await getPhotographers();
+        const photographers = await getPhotographers();
         displayData(photographers);
     };
     

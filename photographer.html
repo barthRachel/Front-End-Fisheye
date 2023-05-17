@@ -9,91 +9,93 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <header id="headerPage" aria-hidden="false">
-      <a href="index.html" aria-label="Fisheye Home page"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" ></a>
-    </header>
+    <div class="main-container">
+      <header id="headerPage" aria-hidden="false">
+        <a href="index.html" aria-label="Fisheye Home page"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" ></a>
+      </header>
 
-    <main id="main" aria-hidden="false">
-      <section class="photograph-header">
-      </section>
+      <main id="main" aria-hidden="false">
+        <section class="photograph-header">
+        </section>
 
-      <section class="filter-medias">
+        <section class="filter-medias">
 
-        <div class="sorting-list">
-					<h2 id="sort-title" class="sort-title">Trier par</h2>
-					<div role="menu" class="dropdown">
-						<button
-							class="dropdown-toggle close dropbtn"
-							role="menuitem"
-							type="button"
-							aria-labelledby="dropdown-title"
-							tabindex="1"
-							data-bs-toggle="dropdown"
-							aria-expanded="false"
-							aria-haspopup="listbox"
-							aria-controls="sort-dropdown"
-						>
-							<span id="dropdown-title">Popularité</span>
-							<img src="assets/icons/dropdown.png" alt="" class="dropdown-arrow" aria-hidden="true" >
-						</button>
-						<ul id="sort-dropdown" class="dropdown-menu button-group" aria-labelledby="sort-title">
-							<li class="li-dropdown">
-								<button
-									id="sort-by-popularity"
-									role="menuitem"
-									type="button"
-									aria-labelledby="sort-popularity"
-									class="sort-button is-checked"
-									tabindex="1"
-									data-sort-value="popularity"
-									onclick="sort('Popularité')"
-								>
-									<span id="sort-popularity" class="sort-name">Popularité</span>
-								</button>
-							</li>
-							<li class="li-dropdown">
-								<button
-									id="sort-by-name"
-									role="menuitem"
-									type="button"
-									aria-labelledby="sort-name"
-									class="sort-button button"
-									tabindex="1"
-									data-sort-value="title"
-									onclick="sort('Titre')"
-								>
-									<span id="sort-name" class="sort-name">Titre</span>
-								</button>
-							</li>
-              <li class="li-dropdown">
-								<button
-									id="sort-by-date"
-									role="menuitem"
-									type="button"
-									aria-labelledby="sort-name"
-									class="sort-button button"
-									tabindex="1"
-									data-sort-value="title"
-									onclick="sort('Date')"
-								>
-									<span id="sort-date" class="sort-name">Date</span>
-								</button>
-							</li>
-						</ul>
-					</div>
-				</div>
+          <div class="sorting-list">
+            <h2 id="sort-title" class="sort-title">Trier par</h2>
+            <div role="menu" class="dropdown">
+              <button
+                class="dropdown-toggle close dropbtn"
+                role="menuitem"
+                type="button"
+                aria-labelledby="dropdown-title"
+                tabindex="1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-controls="sort-dropdown"
+              >
+                <span id="dropdown-title">Popularité</span>
+                <img src="assets/icons/dropdown.png" alt="" class="dropdown-arrow" aria-hidden="true" >
+              </button>
+              <ul id="sort-dropdown" class="dropdown-menu button-group" aria-labelledby="sort-title">
+                <li class="li-dropdown">
+                  <button
+                    id="sort-by-popularity"
+                    role="menuitem"
+                    type="button"
+                    aria-labelledby="sort-popularity"
+                    class="sort-button is-checked"
+                    tabindex="1"
+                    data-sort-value="popularity"
+                    onclick="sort('Popularité')"
+                  >
+                    <span id="sort-popularity" class="sort-name">Popularité</span>
+                  </button>
+                </li>
+                <li class="li-dropdown">
+                  <button
+                    id="sort-by-name"
+                    role="menuitem"
+                    type="button"
+                    aria-labelledby="sort-name"
+                    class="sort-button button"
+                    tabindex="1"
+                    data-sort-value="title"
+                    onclick="sort('Titre')"
+                  >
+                    <span id="sort-name" class="sort-name">Titre</span>
+                  </button>
+                </li>
+                <li class="li-dropdown">
+                  <button
+                    id="sort-by-date"
+                    role="menuitem"
+                    type="button"
+                    aria-labelledby="sort-name"
+                    class="sort-button button"
+                    tabindex="1"
+                    data-sort-value="title"
+                    onclick="sort('Date')"
+                  >
+                    <span id="sort-date" class="sort-name">Date</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-      </section>
+        </section>
 
-      <section class="photograph-media">
+        <section class="photograph-media">
 
-      </section>
+        </section>
 
-      <aside class="like_price">
-        <p class="likes"> <span id="numberOfLikes"></span> <i class="fa fa-heart"></i></p>
-        <p class="price"></p>
-      </aside>
-    </main>
+        <aside class="like_price">
+          <p class="likes"> <span id="numberOfLikes"></span> <i class="fa fa-heart"></i></p>
+          <p class="price"></p>
+        </aside>
+      </main>
+    </div>
 
     <div id="contact_modal" role="dialog" aria-hidden="true" aria-describedby="Contact">
 			<div class="modal">
