@@ -3,10 +3,10 @@
 body {
     display: flex;
     justify-content: center;
+    font-family: "DM Sans", sans-serif;
 }
 
 .main-container {
-    font-family: "DM Sans", sans-serif;
     margin: 0;
     overflow: auto;
     box-sizing: border-box;

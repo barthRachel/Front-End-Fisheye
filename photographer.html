@@ -28,7 +28,7 @@
                 role="menuitem"
                 type="button"
                 aria-labelledby="dropdown-title"
-                tabindex="1"
+                tabindex="0"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 aria-haspopup="listbox"
@@ -45,7 +45,7 @@
                     type="button"
                     aria-labelledby="sort-popularity"
                     class="sort-button is-checked"
-                    tabindex="1"
+                    tabindex="0"
                     data-sort-value="popularity"
                     onclick="sort('Popularité')"
                   >
@@ -59,7 +59,7 @@
                     type="button"
                     aria-labelledby="sort-name"
                     class="sort-button button"
-                    tabindex="1"
+                    tabindex="0"
                     data-sort-value="title"
                     onclick="sort('Titre')"
                   >
@@ -73,7 +73,7 @@
                     type="button"
                     aria-labelledby="sort-name"
                     class="sort-button button"
-                    tabindex="1"
+                    tabindex="0"
                     data-sort-value="title"
                     onclick="sort('Date')"
                   >
@@ -91,7 +91,7 @@
         </section>
 
         <aside class="like_price">
-          <p class="likes"> <span id="numberOfLikes"></span> <i class="fa fa-heart"></i></p>
+          <div class="likes"> <span id="numberOfLikes"></span> <strong class="fa fa-heart" aria-hidden="true"></strong></div>
           <p class="price"></p>
         </aside>
       </main>
@@ -141,7 +141,7 @@
         <div id="Carousel" class="carouselContent">
           <button class="controls prev-image">
             <span>
-              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              <strong class="fa fa-chevron-left" aria-hidden="true"></strong>
             </span>
             <p class="sr-only">Previous image</p>
           </button>
@@ -151,7 +151,7 @@
   
           <button class="controls next-image">
             <span>
-              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              <strong class="fa fa-chevron-right" aria-hidden="true"></strong>
             </span>
             <p class="sr-only">Next image</p>
           </button>
